@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'rest_framework',
     'users',
+    'files'
 ]
 
 ROOT_URLCONF = 'transformer.urls'

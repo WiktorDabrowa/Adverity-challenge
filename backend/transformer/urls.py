@@ -1,7 +1,8 @@
 
 from django.http import HttpResponse
-from django.urls import path
+from django.urls import path, include
 from django.views.generic import TemplateView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 def healthcheck(request):
@@ -27,6 +28,8 @@ def healthcheck(request):
 
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='index.html')),
-    path('healthcheck.json', healthcheck)
+    path('healthcheck.json', healthcheck),
+    path('users/', include('users.urls')),
+    path('token/', TokenObtainPairView.as_view()),
+    path('token/refresh', TokenRefreshView.as_view())
 ]

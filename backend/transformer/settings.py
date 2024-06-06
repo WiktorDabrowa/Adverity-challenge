@@ -33,6 +33,9 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
+    'django.contrib.auth',
+    'rest_framework',
+    'users',
 ]
 
 ROOT_URLCONF = 'transformer.urls'
@@ -97,3 +100,21 @@ BROKER_URL = os.environ['BROKER_URL']
 CELERY_BROKER_URL = f'{BROKER_URL}/0'
 CELERY_RESULT_BACKEND = f'{BROKER_URL}/1'
 CELERY_WORKER_CONCURRENCY = 1
+
+# Django REST
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+# Authorization
+AUTH_USER_MODEL = 'users.User'
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8
+        }
+    }
+]

@@ -23,7 +23,7 @@ export default function Sidebar() {
         },
         {
             path: '/files/enrich',
-            caption: 'Encrich'
+            caption: 'Enrich'
         },
     ]
 

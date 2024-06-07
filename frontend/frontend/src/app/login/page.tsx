@@ -45,14 +45,14 @@ export default function Login() {
     }
 
     async function sendData() {
+        const data = new FormData();
+        data.append('username', formState.username);
+        data.append('password', formState.password)
         const response = await makeRequest({
             method: 'POST',
             url: 'token/',
-            data: {
-                username: formState.username,
-                password: formState.password
-            }
-        }, setIsLoading)
+            data: data
+        }, setIsLoading, false)
         console.log(response)
         if (response.status === 'ok') {
             switch (response.response_status) {

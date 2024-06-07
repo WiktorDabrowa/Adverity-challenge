@@ -31,25 +31,28 @@ async function refreshToken() {
     }
 }
 
-export async function makeRequest({method, url, data=undefined, headers={}}: {method: string, url: string, data?: object, headers?: any}, setLoading: Function) {
-    if (method === 'GET') {
+export async function makeRequest(
+    {method, url, data=undefined, headers={}}: {method: string, url: string, data?: FormData, headers?: any},
+    setLoading: Function,
+    verify:boolean=true
+) {
+    if (verify) {
         const tokensInLocalStorage = await validateToken();
         if (!tokensInLocalStorage) {
             window.location.replace('http://localhost:3000/login');
-            return {status: 'nok', err: 'No tokens in storage, user need to log in again', data:[]}
+            return {status: 'nok', err: 'No tokens in storage, user needs to log in again', data:[]}
         }
     }
     try {
         setLoading(true)
         const response = await fetch(baseUrl + url , {
             method: method,
-            body: JSON.stringify(data),
+            body: data,
             headers: {
                 ...headers,
                 Authorization: localStorage.getItem('access-token')
                     ? 'Bearer ' + localStorage.getItem('access-token')?.replaceAll('\"','')
                     : null,
-                'Content-Type': 'application/json',
                 accept: 'application/json'
             }, 
         })

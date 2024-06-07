@@ -31,7 +31,7 @@ export function refreshToken() {
     }
 }
 
-export async function makeRequest({method, url, data={}, headers={}}: {method: string, url: string, data?: object, headers?: any}, setLoading: Function) {
+export async function makeRequest({method, url, data=undefined, headers={}}: {method: string, url: string, data?: object, headers?: any}, setLoading: Function) {
     try {
         setLoading(true)
         const response = await fetch(baseUrl + url , {
@@ -40,12 +40,14 @@ export async function makeRequest({method, url, data={}, headers={}}: {method: s
             headers: {
                 ...headers,
                 Authorization: localStorage.getItem('access-token')
-                    ? 'Bearer ' + localStorage.getItem('access-token')!.replaceAll('\"','')
+                    ? 'Bearer ' + localStorage.getItem('access-token')?.replaceAll('\"','')
                     : null,
                 'Content-Type': 'application/json',
                 accept: 'application/json'
             }, 
         })
+        console.log("Response:")
+        console.log(response)
         setLoading(false)
         const response_data = await response.json()
         if (response_data.code === 'token_not_valid') {

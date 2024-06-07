@@ -57,15 +57,17 @@ export default function Login() {
         if (response.status === 'ok') {
             switch (response.response_status) {
                 case 200 :
-                    localStorage.setItem("access-token", JSON.stringify(response.data.access))
-                    localStorage.setItem("refresh-token", JSON.stringify(response.data.refresh))
-                    window.location.replace('http://localhost:3000/files')
+                    localStorage.setItem("access-token", JSON.stringify(response.data.access));
+                    localStorage.setItem("refresh-token", JSON.stringify(response.data.refresh));
+                    window.location.replace('http://localhost:3000/files');
+                    break;
                 case 401 :
                     setError('Invalid credentials!');
                     setFormState({
                         username: '',
                         password: '',
-                    })
+                    });
+                    break;
             }
         } else {
             console.log(response.err)

@@ -1,0 +1,37 @@
+.sidebar {
+    width:200px;
+}
+
+.sidebar li {
+    width:100%;
+    display:flex;
+    padding:0.5rem;
+    padding-left:0
+}
+
+.navLink {
+    width:100%;
+    background-color: white;
+    color:var(--secondary-color);
+    border-radius: 0 0.5rem 0.5rem 0;
+    height:5rem;
+    transition:0.5s;
+    border:1px solid transparent;
+    border-left:none;
+    font-size:1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navLink:hover {
+    background-color: var(--primary-color);
+    border: 1px solid var(--secondary-color);
+    border-left:none
+    }
+    
+.navLink.current {
+    border: 1px solid var(--secondary-color);
+    border-left:none;
+    pointer-events: none;
+}

@@ -1,7 +1,7 @@
 const baseUrl: string = "http://localhost:8000/";
 
 
-export function refreshToken() {
+async function refreshToken() {
     try {
         const refreshToken: string | undefined = localStorage.getItem('refresh-token')?.replaceAll('\"','');
         fetch(baseUrl + 'token/refresh',{
@@ -32,6 +32,13 @@ export function refreshToken() {
 }
 
 export async function makeRequest({method, url, data=undefined, headers={}}: {method: string, url: string, data?: object, headers?: any}, setLoading: Function) {
+    if (method === 'GET') {
+        const tokensInLocalStorage = await validateToken();
+        if (!tokensInLocalStorage) {
+            window.location.replace('http://localhost:3000/login');
+            return {status: 'nok', err: 'No tokens in storage, user need to log in again', data:[]}
+        }
+    }
     try {
         setLoading(true)
         const response = await fetch(baseUrl + url , {
@@ -51,12 +58,15 @@ export async function makeRequest({method, url, data=undefined, headers={}}: {me
         setLoading(false)
         const response_data = await response.json()
         if (response_data.code === 'token_not_valid') {
+            console.log('token stale, attempting refresh...')
             refreshToken();
-            makeRequest({method, url, data, headers}, setLoading)
+            console.log('Token refreshed. Attempting request again...')
+            const response: any = await makeRequest({method, url, data, headers}, setLoading);
+            return response
         }
         return {status: "ok", response_status: response.status, data: response_data}
     } catch (error) {
-        return {status:'nok', err: error}
+        return {status:'nok', err: error, data:[]}
     }
 }
 
@@ -65,8 +75,7 @@ export async function validateToken() {
     let refreshToken = localStorage.getItem("refresh-token");
     if (accessToken === null || refreshToken === null) {
         console.log('No tokens in localstorage, redirecting to login page')
-        window.location.replace('http://localhost:3000/login')
-    } else {
-        
+        return false
     }
+    return true
 }

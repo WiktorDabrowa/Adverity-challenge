@@ -1,0 +1,41 @@
+.fileList {
+    margin:2rem;
+    height:80vh;
+    flex:1;
+    background-color: white;
+    border:2px solid var(--secondary-color);
+    border-radius: 1rem;
+    overflow:hidden;
+    position: relative;
+}
+
+.titleRow {
+    padding:1rem;
+    border-bottom: 2px solid var(--secondary-color);
+    background-color: var(--primary-color);
+    font-size:1.5rem;
+    color:var(--secondary-color)
+}
+
+.fileRow {
+    list-style: none;
+    display:flex;
+    justify-content: space-between;
+    border-bottom:1px solid var(--secondary-color);
+    color:var(--secondary-color);
+    transition:0.5s
+}
+
+.fileLink {
+    flex:1;
+    transition:0.5s
+}
+
+.fileLink:hover {
+    background-color: var(--primary-color);
+}
+
+.fileName {
+    padding:0.5rem;
+    height:100%
+}

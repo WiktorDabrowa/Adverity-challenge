@@ -35,11 +35,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.auth',
     'rest_framework',
+    'corsheaders',
     'users',
-    'files'
+    'files',
 ]
 
 ROOT_URLCONF = 'transformer.urls'
+
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 TEMPLATES = [
     {

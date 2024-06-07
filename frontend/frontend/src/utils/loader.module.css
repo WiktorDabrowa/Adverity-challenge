@@ -1,0 +1,23 @@
+.loaderContainer {
+    position: absolute;
+    width:100vw;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    background-color: #00000070;
+    align-items:center
+}
+
+.loader {
+    width:5rem;
+    height:5rem;
+    background-color: var(--primary-color);
+    animation: spin 2s infinite alternate ease-in-out;
+}
+
+@keyframes spin {
+    0% {rotate: 0;};
+    10% {rotate: -5deg};
+    90% {rotate: 365deg};
+    100% {rotate: 360deg;}
+}

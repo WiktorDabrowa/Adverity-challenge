@@ -1,0 +1,69 @@
+.addFileFormContainer {
+    flex:1;
+    padding:1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addFileForm {
+    padding:1rem;
+    width:20rem;
+    display:flex;
+    flex-direction: column;
+    gap:0.5rem;
+    border:1px solid var(--secondary-color);
+    background-color: white;
+    border-radius: 0.5rem;
+}
+
+.addFileForm h2 {
+    color: var(--secondary-color)
+}
+
+.addFileForm input {
+    height:2rem
+}
+
+.addFileForm input[type='text'] {
+    padding:0.25rem;
+    border-radius:0.5rem;
+    border:1px solid var(--secondary-color);
+    transition: 0.5s;
+}
+
+.addFileForm input[type='text']:focus {
+    background-color: var(--primary-color);
+    outline:none;
+    border: 1px solid var(--secondary-color)
+}
+
+.addFileForm input[type='submit'] {
+    background-color: white;
+    border:1px solid var(--secondary-color);
+    border-radius:0.5rem;
+    transition:0.5s;
+    height:4rem;
+    font-size:1rem;
+}
+
+.addFileForm input[type='submit']:hover{
+    cursor:pointer;
+    background-color: var(--primary-color);
+}
+
+.error {
+    color:red
+}
+
+.addFileForm input[type='file']::file-selector-button {
+    background-color: white;
+    border-radius: 0.25rem;
+    border:1px solid var(--secondary-color);
+    transition:0.5s;
+}
+
+.addFileForm input[type='file']:hover::file-selector-button {
+    background-color: var(--primary-color);
+    cursor:pointer
+}

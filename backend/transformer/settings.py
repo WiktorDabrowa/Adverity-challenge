@@ -126,3 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
         }
     }
 ]
+
+# Storage
+MEDIA_ROOT = 'media/'

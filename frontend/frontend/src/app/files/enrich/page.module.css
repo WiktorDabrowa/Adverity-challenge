@@ -20,7 +20,7 @@
 }
 
 .enrichForm label {
-    margin-top:0.25rem;
+    margin:0.25rem 0;
 }
 
 .enrichForm h2 {
@@ -47,6 +47,7 @@
 
 .input:hover, .input:focus {
     background-color: var(--primary-color);
+    outline: none;
     cursor:pointer
 }
 
@@ -80,4 +81,10 @@
 
 .input[type='text']:hover {
     cursor: text
+}
+
+
+
+.input[type='submit']:not(:disabled):hover {
+    background-color: var(--primary-color);
 }

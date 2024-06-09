@@ -7,6 +7,7 @@ import styles from './page.module.css';
 
 type FileData = {titles: Array<string>, rows: Array<Array<string|Number>>, name: string}
 
+
 export default function FilePreview({params}: {params: {fileId: string}}) {
 
     const [file, setFile] = useState<FileData>();
@@ -24,28 +25,27 @@ export default function FilePreview({params}: {params: {fileId: string}}) {
             }
         }
         fetchData();
-    }, []);
+    }, [params.fileId]);
 
-    const fieldTitles = file?.titles.map((title) => {
-        return <th className={styles.titleCell}>{title}</th>
+    const fieldTitles = file?.titles.map((title, i) => {
+        return <th key={i} className={styles.titleCell}>{title}</th>
     })
 
-    const dataRows = file?.rows.map((row) => {
-        const dataCells = row.map((data) => {
+    const dataRows = file?.rows.map((row, i) => {
+        const dataCells = row.map((data,i) => {
             return(
-                <td className={styles.dataCell}>
+                <td key={i} className={styles.dataCell}>
                     {data.toString()}
                 </td>
             )
         })
 
         return(
-            <tr className={styles.dataRow}>
+            <tr key={i} className={styles.dataRow}>
                 {dataCells}
             </tr>
         )
     })
-    console.log(file)
 
     return(
         <div className={styles.container}>

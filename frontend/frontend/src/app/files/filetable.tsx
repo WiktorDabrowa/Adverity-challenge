@@ -1,3 +1,4 @@
+'use client'
 import { FileData } from './page'
 import styles from './filelist.module.css';
 import Link from 'next/link';

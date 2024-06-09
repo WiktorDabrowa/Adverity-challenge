@@ -4,7 +4,6 @@ import styles from './page.module.css';
 import React, { useEffect, useState } from 'react';
 import { makeRequest } from '@/utils/requests';
 import Loader from '@/utils/loader';
-import { setDefaultResultOrder } from 'dns';
 
 type EnrichFormState = {
     newFileName: string,
@@ -14,12 +13,12 @@ type EnrichFormState = {
     foreignKeyName: string,
 }
 
-export default function enrichFile() {
+export default function EnrichFile() {
 
     const [userFiles, setUserFiles] = useState<FileData>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [availableLocalKeys, setAvailableLocalKeys] = useState<Array<string>>([]);
-    const [foreignResourceKeys, setForeignResourceKeys] = useState<Array<string> | undefined>()
+    const [foreignResourceKeys, setForeignResourceKeys] = useState<Array<string>>([])
     const [error, setError] = useState<string | undefined>();
     const [formState, setFormState] = useState<EnrichFormState>({
         newFileName: '',
@@ -36,7 +35,11 @@ export default function enrichFile() {
                 url: 'files/',
             }, setIsLoading)
             if (response.status === 'ok') {
-                setUserFiles(response.data)
+                setUserFiles(response.data);
+                setFormState(formState => ({
+                    ...formState,
+                    selectedFile: response.data[0].id
+                }));
             }
         }
         fetchData();
@@ -49,7 +52,11 @@ export default function enrichFile() {
                 url: `files/${formState.selectedFile}/`
             }, setIsLoading)
             if (response.status === 'ok') {
-                setAvailableLocalKeys(response.data.titles)
+                setAvailableLocalKeys(response.data.titles);
+                setFormState(formState => ({
+                    ...formState,
+                    localKeyName: response.data.titles[0],
+                }))
             } else {
                 console.log("Failed to fetch available keys")
                 setError('Unexpected error happened, please try again')
@@ -66,7 +73,7 @@ export default function enrichFile() {
         return <option key={i} value={key}>{key}</option>
     })
 
-    const foreignResourceKeyOptions = foreignResourceKeys?.map((key, i) => {
+    const foreignResourceKeyOptions = foreignResourceKeys.map((key, i) => {
         return <option key={i} value={key}>{key}</option>
     })
 
@@ -76,7 +83,12 @@ export default function enrichFile() {
             const response = await fetch(formState.endpoint);
             const data = await response.json();
             if (data[0] instanceof Object) {
-                setForeignResourceKeys(Object.keys(data[0]));
+                const foreignKeys = Object.keys(data[0])
+                setForeignResourceKeys(foreignKeys);
+                setFormState({
+                    ...formState,
+                    foreignKeyName: foreignKeys[0]
+                })
             } else {
                 setError('Foreign resource in an unexpected format. please select different resource')
             }

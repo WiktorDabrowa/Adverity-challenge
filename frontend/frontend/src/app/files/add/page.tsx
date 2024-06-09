@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Loader from "@/utils/loader";
 import styles from "./page.module.css";
 
-export default function addFile() {
+export default function AddFile() {
 
     const [file, setFile] = useState<File | undefined>();
     const [name, setName] = useState<string>('')
@@ -16,10 +16,10 @@ export default function addFile() {
             setError('File name cannot be empty')
             return false
         }
-        // if (name.includes('/')) {
-        //     setError('File name cannot contain "/", please provide another name')
-        //     return false
-        // }
+        if (name.includes('/')) {
+            setError('File name cannot contain "/", please provide another name')
+            return false
+        }
         if (file === undefined) {
             setError('Please specify a file');
             return false

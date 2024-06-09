@@ -58,3 +58,14 @@ services:
       - redis
       - celery
     restart: on-failure
+
+  frontend:
+    container_name: adverity-transformer-challenge-frontend
+    build:
+      context: ./frontend/frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    restart: always

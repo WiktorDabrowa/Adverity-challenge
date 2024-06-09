@@ -62,7 +62,7 @@ services:
   frontend:
     container_name: adverity-transformer-challenge-frontend
     build:
-      context: ./frontend/frontend
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
       - 3000:3000

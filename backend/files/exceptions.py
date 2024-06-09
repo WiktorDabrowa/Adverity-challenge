@@ -1,0 +1,2 @@
+class EnrichementError(Exception):
+    pass

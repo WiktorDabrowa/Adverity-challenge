@@ -1,0 +1,55 @@
+.container {
+    flex:1;
+    padding:2rem;
+    height:90%;
+    display:flex;
+    flex-direction: column;
+    overflow:scroll
+}
+
+.tableWrapper {
+    flex:1;
+    overflow:auto;
+    border:2px solid var(--secondary-color);
+    border-radius:1rem;
+    position:relative;
+}
+
+.fileTable {
+    white-space: nowrap;
+    border:none;
+    border-spacing: 0
+}
+
+.fieldTitles{
+    position:sticky;
+    top:0;
+    background-color: var(--primary-color);
+}
+    
+.titleCell {
+    background-color: var(--primary-color);
+    padding:0.5rem 1rem;
+    border-right: 1px solid var(--secondary-color);
+    border-bottom:1px solid var(--secondary-color);
+    color: var(--secondary-color)
+}
+
+.titleCell:last-child {
+    border-right: none;
+}
+
+.dataCell{
+    border-bottom:1px solid black;
+    border-right:1px solid black;
+    padding:0.25rem
+}
+
+.dataRow{
+    transition:0.25s
+}
+
+.dataRow:hover {
+    background-color: var(--primary-color);
+    color:var(--secondary-color)
+}

@@ -7,6 +7,7 @@
     border-radius: 1rem;
     overflow:hidden;
     position: relative;
+    overflow-y:auto
 }
 
 .titleRow {
@@ -14,7 +15,9 @@
     border-bottom: 2px solid var(--secondary-color);
     background-color: var(--primary-color);
     font-size:1.5rem;
-    color:var(--secondary-color)
+    color:var(--secondary-color);
+    position:sticky;
+    top:0
 }
 
 .fileRow {

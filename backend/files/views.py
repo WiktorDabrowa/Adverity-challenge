@@ -2,15 +2,12 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from django.core.files.storage import default_storage
 from django.core.exceptions import ValidationError
 from .models import File as File
 from .serializers import FileSerializer, FileListSerializer
 from .exceptions import EnrichementError
 from .utils import prepare_file_data, create_new_file, create_new_csv_file
 from .enrich import  FileEnricher
-
-from pprint import pprint # TODO: remove
 
 
 class FileViewSet(viewsets.GenericViewSet):
@@ -74,7 +71,6 @@ def enrich_file(request):
             data=str(e)
         )
     new_csv_file = create_new_csv_file(new_file_content)
-    print(new_csv_file)
     create_new_file(
         file_name=request.data['newFileName'],
         owner=request.user,
